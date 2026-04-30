@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Icone da página -->
+    <link rel="icon" href="../../assets/images/logo_stockit.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="listadeCompras.css">
+    <title>Lista de Compras</title>
+</head>
+
+<body>
+    <header class="header-section">
+        <div class="header-content">
+            <div class="logo-container">
+                <a href="../home-page/home.html">
+                    <img src="../../assets/images/logo_stockit.ico" alt="Logo">
+                </a>
+                <a href="../home-page/home.html" class="logo-text">StockIT</a>
+            </div>
+
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="texto-pesquisa" class="search-input"
+                        placeholder="Pesquise listas ou produtos...">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-botoes-gerais">
+        <button class="botao botao-criar-lista" onclick="abrirModal('modal-cadastro')">
+            <i class="fa-solid fa-plus-circle"></i> Adicionar Item
+        </button>
+        <button class="botao botao-criar-lista" onclick="abrirModalCriarLista()">
+            <i class="fa-solid fa-plus"></i> Nova Lista
+        </button>
+    </div>
+
+    <!-- MODAIS -->
+    <!-- Modal Criar Lista -->
+    <div id="modal-criar-lista" class="modal">
+        <div class="modal-conteudo modal-criar">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-list-check"></i> Criar Nova Lista</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-criar-lista')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="nova-lista-nome">Nome da Lista</label>
+                    <input type="text" id="nova-lista-nome" placeholder="Ex: Supermercado, Padaria...">
+                </div>
+                <div class="form-group">
+                    <label for="nova-lista-data">Data de Compra</label>
+                    <input type="date" id="nova-lista-data">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-criar-lista')">Cancelar</button>
+                <button class="botao botao-salvar" onclick="criarNovaLista()">Criar Lista</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAIS -->
+    <!-- Modal Cadastrar Item -->
+    <div id="modal-cadastro" class="modal">
+        <div class="modal-conteudo modal-item">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-plus-circle"></i> Adicionar Item</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-cadastro')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="cadastro-nome">Nome do Produto</label>
+                    <input type="text" id="cadastro-nome" placeholder="Ex: Arroz, Feijão...">
+                </div>
+
+                <div class="form-group">
+                    <label for="cadastro-quantidade">Quantidade</label>
+                    <input type="number" id="cadastro-quantidade" min="1" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="cadastro-lista">Selecione a Lista</label>
+                    <select id="cadastro-lista">
+                        <option disabled selected>Selecione uma Lista</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nova-lista">Ou Crie uma Nova Lista</label>
+                    <input type="text" id="nova-lista" placeholder="Nome da nova lista (opcional)">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-cadastro')">Cancelar</button>
+                <button class="botao botao-salvar" onclick="adicionarItem()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL EDITAR ===== -->
+    <div id="modal-editar" class="modal">
+        <div class="modal-conteudo modal-item">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-pen-to-square"></i> Editar Item</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-editar')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editar-quantidade">Quantidade</label>
+                    <input type="number" id="editar-quantidade" min="1" value="1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-editar')">Cancelar</button>
+                <button class="botao botao-salvar" onclick="salvarEdicao()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL EXCLUIR ITEM ===== -->
+    <div id="modal-excluir" class="modal">
+        <div class="modal-conteudo modal-item">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-trash-can"></i> Excluir Item</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-excluir')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir <strong id="excluir-nome"></strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-excluir')">Cancelar</button>
+                <button class="botao botao-excluir" onclick="confirmarExclusao()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL EDITAR NOME DA LISTA ===== -->
+    <div id="modal-editar-lista" class="modal">
+        <div class="modal-conteudo modal-item">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-pen"></i> Editar Nome da Lista</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-editar-lista')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editar-nome-lista">Novo Nome</label>
+                    <input type="text" id="editar-nome-lista" placeholder="Ex: Supermercado...">
+                </div>
+                <div class="form-group">
+                    <label for="editar-data-lista">Data de Compra</label>
+                    <input type="date" id="editar-data-lista">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-editar-lista')">Cancelar</button>
+                <button class="botao botao-salvar" onclick="salvarEditarLista()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL EXCLUIR LISTA ===== -->
+    <div id="modal-excluir-lista" class="modal">
+        <div class="modal-conteudo modal-item">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-trash-can"></i> Excluir Lista</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-excluir-lista')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir a lista <strong id="excluir-lista-nome"></strong>?</p>
+                <p class="info-small">Esta lista contém <strong id="excluir-lista-itens">0</strong> item(ns). Esta ação é irreversível.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-excluir-lista')">Cancelar</button>
+                <button class="botao botao-excluir" onclick="confirmarExclusaoLista()">Excluir Lista</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="listas-container" id="listadeCompras">
+    </main>
+    <footer class="rodape">
+        <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
+    </footer>
+</body>
+<script src="listadeCompras.js"></script>
+
+</html>

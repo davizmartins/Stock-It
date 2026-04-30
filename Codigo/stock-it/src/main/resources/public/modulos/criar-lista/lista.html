@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Lista de Compra</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <header class="p-3">
+        <a class="navbar-brand fw-bold d-inline-flex align-items-center gap-2" href="../home-page/home.html">
+            <img src="../../assets/images/logo_stockit.ico" alt="Logo" style="height: 35px; width: auto;">
+            <h1 id="tit1">StockIT</h1>
+        </a>
+    </header>
+
+    <section>
+
+        <div class="criar_lista">
+
+            <h1 id="titulo">Cadastre sua Lista de Compra</h1>
+
+            <p>Dê um nome a sua lista de compra</p>
+            <input class="informacoes" type="text" id="nome_lista" placeholder="Nome da lista...">
+
+            <p>Adicione alimentos à sua lista</p>
+            <input class="informacoes" type="button" id="adicinar_alimentos" value="Adicionar Alimentos">
+
+            <div class="criacao_exclusao">
+
+                <input class="botao" type="button" id="limpar-lista" value="Limpe a lista">
+
+                <input class="botao" type="button" id="atualizar-lista" value="Atualize uma lista">
+
+                <input class="botao" type="button" id="criar-lista" value="Criar Lista">
+
+                <input class="botao" type="button" id="excluir-lista" value="Excluir uma lista">
+
+            </div>
+
+        </div>
+
+        <div id="modal-atualizar" class="modal">
+            <div class="modal-content">
+                <span class="fechar-modal">&times;</span>
+                <h2>Atualizar Lista</h2>
+                <input type="text" id="nome-lista-atualizar" placeholder="Digite o nome da lista">
+                <div id="alimentos-container">
+                    <button id="adicionar-alimento">Adicionar Alimento</button>
+                    <button id="salvar-alteracoes">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <script src="lista.js" defer> </script>
+
+</body>
+
+</html>

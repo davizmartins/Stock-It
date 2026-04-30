@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockIt</title>
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!--link para conseguir os ícones-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!---->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="home.css">
+
+    <link rel="icon" href="../../assets/images/logo_stockit.ico">
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <!-- Header Verde -->
+        <header class="header-section">
+            <div class="row align-items-center py-3">
+                <div class="col-2">
+                    <div class="logo-container">
+                        <img id="logo-header" src="../../assets/images/logo_stockit.ico" alt="image/icon">
+                        <h1 class="logo-text">StockIT</h1>
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <div class="search-container">
+                        <div class="search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" id="texto-pesquisa" class="search-input"
+                                placeholder="Pesquise produtos e ambientes..." />
+                        </div>
+                        <select name="" id="dropdown-resultados" class="search-dropdown" size="5"></select>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="user-section">
+                        <div class="notification-container">
+                            <button id="btnNotificacao" class="notification-btn">
+                                <i class="fa-solid fa-bell"></i>
+                                <span id="badgeNotificacao" class="notification-badge">0</span>
+                            </button>
+                            <div id="dropdownNotificacao" class="notification-dropdown hidden"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span id="userLogado" class="fw-semibold text-white small"></span>
+                            <button id="btnLogout" class="btn btn-outline-light btn-sm">Sair</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Meus Ambientes Section -->
+            <section class="ambientes-section">
+                <h1 class="section-title">MEUS AMBIENTES</h1>
+
+                <!-- Carousel Container -->
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-btn-prev" id="carousel-prev">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <div class="carousel-wrapper">
+                        <div class="ambientes-carousel" id="ambientes-container">
+                            <!-- Os ambientes serão carregados dinamicamente aqui -->
+                        </div>
+                    </div>
+
+                    <button class="carousel-btn carousel-btn-next" id="carousel-next">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="add-ambiente-container">
+                    <button id="btn-crudAmbiente" class="add-ambiente-btn" data-bs-toggle="modal"
+                        data-bs-target="#modalCadastroAmbiente">
+                        <i class="fa-solid fa-plus"></i>
+                        Adicionar Ambientes
+                    </button>
+
+                    <button id="btnCadastroPorFoto" class="add-ambiente-btn">
+                        <i class="fa-solid fa-camera"></i>
+                        Cadastro por foto
+                    </button>
+
+                    <!-- Input escondido para o cadastro por foto -->
+                    <input type="file" id="inputCadastroPorFoto" accept="image/*,application/pdf"
+                        style="display: none;">
+                </div>
+
+            </section>
+
+            <!-- Funcionalidades Section -->
+            <section class="funcionalidades-section">
+                <div class="funcionalidades-grid">
+
+                    <div class="funcionalidade-card" id="receitas" data-url="../receitas/receitas.html">
+                        <div class="funcionalidade-icon receitas-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <div class="funcionalidade-text">
+                            <h3>RECEITAS</h3>
+                        </div>
+                    </div>
+
+                    <div class="funcionalidade-card" id="compras" data-url="../lista-de-compra/listadeCompras.html">
+                        <div class="funcionalidade-icon compras-icon">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                        <div class="funcionalidade-text">
+                            <h3>LISTA DE</h3>
+                            <h3>COMPRA</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Sessão modais -->
+        <section>
+
+            <!-- Modal Bootstrap -->
+            <!-- Modal: Cadastrar Ambiente -->
+            <div class="modal fade" id="modalCadastroAmbiente" tabindex="-1" aria-labelledby="tituloCadastro"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="formCadastrarAmbiente">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tituloCadastro">Cadastrar Ambiente</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Fechar"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nomeAmbienteModal" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="nomeAmbienteModal" required />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tipoAmbienteModal" class="form-label">Tipo</label>
+                                    <select class="form-select" id="tipoAmbienteModal" required>
+                                        <option value="" selected disabled>Selecione</option>
+                                        <option value="1">Geladeira</option>
+                                        <option value="2">Freezer</option>
+                                        <option value="3">Despensa</option>
+                                    </select>
+                                </div>
+
+                                <div class="text-center">
+                                    <img id="previewImagemAmbiente" src=""
+                                        style="display:none; max-width:120px; margin-top:10px;"
+                                        alt="Preview do ambiente" />
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Cadastrar</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalCadastroPorFoto" tabindex="-1" aria-labelledby="tituloCadastroPorFoto"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="tituloCadastroPorFoto">Cadastro por foto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Fechar"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="selectAmbienteOcr" class="form-label">Ambiente destino</label>
+                                <select id="selectAmbienteOcr" class="form-select">
+                                    <option value="" selected disabled>Selecione um ambiente</option>
+                                </select>
+                            </div>
+
+                            <p class="text-muted small mb-2">
+                                Revise os itens identificados na nota. Você pode ajustar o nome e a quantidade antes de
+                                salvar.
+                            </p>
+
+                            <div class="table-responsive" style="max-height: 320px; overflow-y: auto;">
+                                <table class="table table-sm align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%;"></th> <!-- checkbox -->
+                                            <th style="width: 45%;">Nome do alimento</th>
+                                            <th style="width: 15%;">Quantidade</th>
+                                            <th style="width: 25%;">Validade</th>
+                                            <th style="width: 10%;"></th> <!-- ações -->
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="tbodyItensOcr">
+                                        <!-- linhas geradas via JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" id="btnConfirmarCadastroPorFoto" class="btn btn-success">
+                                Salvar itens no ambiente
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!--footer-->
+        <footer>
+            <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
+        </footer>
+        <script src="home.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+</body>
+<script>
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const nomeSpan = document.getElementById("userLogado");
+    const btnLogout = document.getElementById("btnLogout");
+
+    btnLogout.addEventListener("click", () => {
+        Swal.fire({
+            title: 'Deseja sair?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, sair',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#dc3545'
+        }).then(result => {
+            if (result.isConfirmed) {
+                sessionStorage.removeItem("user");
+                window.location.href = "../login/login.html";
+            }
+        });
+    });
+</script>
+
+</html>

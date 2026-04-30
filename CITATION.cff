@@ -1,0 +1,30 @@
+cff-version: 1.0.1
+message: Please cite this software using these metadata.
+title: StockIT
+authors:
+  - family-names: Tristão Pinto
+    given-names: Arthur Henrique
+  - family-names: Rafael de Oliveira Gurgel Martins
+    given-names: Davi
+  - family-names: Cunha da Silva
+    given-names: Diego
+  - family-names: Pereira Couto Rodrigues
+    given-names:  Gabriel
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Jerônimo de Almeida
+    given-names: Carolina Stephanie
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Cardoso Brandao
+    given-names: Wladmir
+keywords:
+  - comida
+  - estoque
+  - vencimento
+  - gerenciamento
+  - organização
+repository-code: 
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2025-09-22
