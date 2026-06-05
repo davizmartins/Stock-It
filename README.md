@@ -12,15 +12,9 @@ Davi Rafael de Oliveira Gurgel Martins
 
 Gabriel Pereira Couto Rodrigues
 
-## Professores responsáveis
-
-Carolina Stephanie Jerônimo de Almeida
-
-Wladmir Cardoso Brandao
-
 # 🚀 Instruções de Utilização
 
-### 0. Rodando a Aplicação(Se não for utilizar a versão hospedada)
+### 0. Rodando a Aplicação
 1. Clone o repositório 
 2. Abra a pasta de código e rode o arquivo Principal.java
 3. Espere conectar com o banco de dados(logs no terminal avisam a conexão)
@@ -28,7 +22,7 @@ Wladmir Cardoso Brandao
 ### 1. 📥 Acesso à Plataforma
 1. Abra seu navegador (Chrome, Edge, Firefox).  
 2. Acesse a URL da aplicação:  
-   **http://localhost:4567** *(ou a [URL](https://plmg-cc-ti2-2025-2-g03-stockit-production.up.railway.app/modulos/home-page/home.html) de produção).*  
+   **http://localhost:4567** 
 3. Faça login com seu usuário e senha.  
 4. Caso não possua conta, utilize o fluxo de cadastro.
 
